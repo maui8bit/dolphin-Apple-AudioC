@@ -8,9 +8,11 @@ of the GNU General Public License, version 2 or later (GPLv2+).
 
 Please read the [FAQ](https://dolphin-emu.org/docs/faq/) before using Dolphin.
 
-THIS IS A FORK OF DOLPHIN, ADDING APPLE AIRPODS SPATIAL AUDIO SUPPORT. THIS IS NOT OFFICIAL, ADDING AN AUDIO BACKEND FOR MACOS SPECIALLY MADE AIRPODS WITH SPATIAL AUDIO. This may only be supported by Apple Silicon since the spatial api's are an
+THIS IS A FORK OF DOLPHIN, ADDING APPLE AIRPODS SPATIAL AUDIO SUPPORT. THIS IS NOT OFFICIAL, ADDING AN AUDIO BACKEND FOR MACOS SPECIALLY MADE AIRPODS WITH SPATIAL AUDIO. This may only be supported by Apple Silicon since the spatial APIs are an Apple Silicon Exclusive
 
 ## System Tested
+
+Apple MacBook Neo (8Gb UMA) (512gb/ Dual NAND Flash)
 
 ### Desktop
 
@@ -21,8 +23,7 @@ THIS IS A FORK OF DOLPHIN, ADDING APPLE AIRPODS SPATIAL AUDIO SUPPORT. THIS IS N
 * Graphics
     Apple A18 Pro
 
-Dolphin can only be installed on devices that satisfy the above requirements. Attempting to install on an unsupported device will fail and display an error message.
-
+I have yet to add a check to run only on Apple Silicon
 ## Building
 
 You may find building instructions on the appropriate wiki page for your operating system:
