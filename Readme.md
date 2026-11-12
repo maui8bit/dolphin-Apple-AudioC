@@ -8,31 +8,18 @@ of the GNU General Public License, version 2 or later (GPLv2+).
 
 Please read the [FAQ](https://dolphin-emu.org/docs/faq/) before using Dolphin.
 
-## System Requirements
+THIS IS A FORK OF DOLPHIN, ADDING APPLE AIRPODS SPATIAL AUDIO SUPPORT. THIS IS NOT OFFICIAL, ADDING AN AUDIO BACKEND FOR MACOS SPECIALLY MADE AIRPODS WITH SPATIAL AUDIO. This may only be supported by Apple Silicon since the spatial api's are an
+
+## System Tested
 
 ### Desktop
 
 * OS
-    * Windows (10 1903 or higher).
-    * Linux.
-    * macOS (11.0 Big Sur or higher).
-    * Unix-like systems other than Linux are not officially supported but might work.
+    * macOS (27.2.1 Golden Gate).
 * Processor
-    * A CPU with SSE2 support.
-    * A modern CPU (3 GHz and Dual Core, not older than 2008) is highly recommended.
+    Apple A18 Pro
 * Graphics
-    * A reasonably modern graphics card (Direct3D 11.1 / OpenGL 3.3).
-    * A graphics card that supports Direct3D 11.1 / OpenGL 4.4 is recommended.
-
-### Android
-
-* OS
-    * Android (7.0 Nougat or higher).
-* Processor
-    * A processor with support for 64-bit applications (either ARMv8 or x86-64).
-* Graphics
-    * A graphics processor that supports OpenGL ES 3.0 or higher. Performance varies heavily with [driver quality](https://dolphin-emu.org/blog/2013/09/26/dolphin-emulator-and-opengl-drivers-hall-fameshame/).
-    * A graphics processor that supports standard desktop OpenGL features is recommended for best performance.
+    Apple A18 Pro
 
 Dolphin can only be installed on devices that satisfy the above requirements. Attempting to install on an unsupported device will fail and display an error message.
 
@@ -52,30 +39,8 @@ Before building, make sure to pull all submodules:
 git submodule update --init --recursive
 ```
 
-### Android-specific instructions
 
-These instructions assume familiarity with Android development. If you do not have an
-Android dev environment set up, see [AndroidSetup.md](AndroidSetup.md).
 
-If using Android Studio, import the Gradle project located in `./Source/Android`.
-
-Android apps are compiled using a build system called Gradle. Dolphin's native component,
-however, is compiled using CMake. The Gradle script will attempt to run a CMake build
-automatically while building the Java code.
-
-## Uninstalling
-
-On Windows, simply remove the extracted directory, unless it was installed with the NSIS installer,
-in which case you can uninstall Dolphin like any other Windows application.
-
-Linux users can run `cat install_manifest.txt | xargs -d '\n' rm` as root from the build directory
-to uninstall Dolphin from their system.
-
-macOS users can simply delete Dolphin.app to uninstall it.
-
-Additionally, you'll want to remove the global user directory if you don't plan on reinstalling Dolphin.
-
-## Command Line Usage
 
 ```
 Usage: Dolphin.exe [options]... [FILE]...
@@ -109,6 +74,8 @@ Available DSP emulation engines are HLE (High Level Emulation) and
 LLE (Low Level Emulation). HLE is faster but less accurate whereas
 LLE is slower but close to perfect. Note that LLE has two submodes (Interpreter and Recompiler)
 but they cannot be selected from the command line.
+
+Note: To utilize Dolby Digital you must use the LLE Compiler
 
 Available video backends are "D3D" and "D3D12" (they are only available on Windows), "OGL", and "Vulkan".
 There's also "Null", which will not render anything, and
