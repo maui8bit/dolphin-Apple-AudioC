@@ -111,4 +111,11 @@ if (DSPTOOL)
   add_subdirectory(DSPTool)
 endif()
 
+if(APPLE)
+  target_sources(audiocommon PRIVATE
+    AVAudioEngineStream.mm
+    AVAudioEngineStream.h
+  )
+  target_link_libraries(audiocommon PRIVATE "-framework AVFoundation" "-framework AudioToolbox")
+endif()
 # TODO: Add DSPSpy. Preferably make it option() and cpack component
