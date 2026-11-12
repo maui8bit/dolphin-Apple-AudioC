@@ -14,6 +14,10 @@
 #include "AudioCommon/OpenSLESStream.h"
 #include "AudioCommon/PulseAudioStream.h"
 #include "AudioCommon/WASAPIStream.h"
+#ifdef __APPLE__
+#include "AudioCommon/AVAudioEngineStream.h"
+constexpr std::string_view BACKEND_AVAUDIOENGINE = "AVAudioEngine";
+#endif
 #include "Common/FileUtil.h"
 #include "Common/Logging/Log.h"
 #include "Common/TimeUtil.h"
@@ -42,6 +46,10 @@ static std::unique_ptr<SoundStream> CreateSoundStreamForBackend(std::string_view
     return std::make_unique<OpenSLESStream>();
   else if (backend == BACKEND_WASAPI && WASAPIStream::IsValid())
     return std::make_unique<WASAPIStream>();
+#ifdef __APPLE__
+  else if (backend == BACKEND_AVAUDIOENGINE && AVAudioEngineStream::IsValid())
+    return std::make_unique<AVAudioEngineStream>();
+#endif
   return {};
 }
 
@@ -131,6 +139,10 @@ std::vector<std::string> GetSoundBackends()
     backends.emplace_back(BACKEND_OPENSLES);
   if (WASAPIStream::IsValid())
     backends.emplace_back(BACKEND_WASAPI);
+#ifdef __APPLE__
+  if (AVAudioEngineStream::IsValid())
+    backends.emplace_back(BACKEND_AVAUDIOENGINE);
+#endif
 
   return backends;
 }
@@ -156,8 +168,8 @@ bool SupportsLatencyControl(std::string_view backend)
 bool SupportsVolumeChanges(std::string_view backend)
 {
   // FIXME: this one should ask the backend whether it supports it.
-  //       but getting the backend from string etc. is probably
-  //       too much just to enable/disable a stupid slider...
+  //        but getting the backend from string etc. is probably
+  //        too much just to enable/disable a stupid slider...
   return backend == BACKEND_CUBEB || backend == BACKEND_OPENAL || backend == BACKEND_WASAPI;
 }
 
